@@ -2,6 +2,8 @@
 #include <fstream>
 #include <stdlib.h>
 #include <algorithm>
+#include <string>
+#include <ctime>
 
 using namespace std;
 
@@ -9,7 +11,7 @@ class Game
 {
 private:
   static const int maxFalseAttempts = 5;
-  
+
   string getWord(const char* file);
   string renderResult(string word, string guesses);
 public:
@@ -23,7 +25,7 @@ string Game::getWord(const char* file)
   int wordCount=0;
   while (getline(wordFile, word)) ++wordCount;
   int index = rand() % wordCount;
-  wordFile.clear();    
+  wordFile.clear();
   wordFile.seekg(0, ios::beg);
   for (int n=0; getline(wordFile, word) && n<index; ++n);
   return word;
@@ -95,9 +97,9 @@ void Game::loop()
 string Game::renderResult(string word, string guesses)
 {
   string result = "";
-  for(int n=0; n<word.size(); ++n) result+= '_';
-  for(int i=0; i<guesses.size(); ++i)
-    for(int n=0; n<word.size(); ++n)
+  for(unsigned int n=0; n<word.size(); ++n) result+= '_';
+  for(unsigned int i=0; i<guesses.size(); ++i)
+    for(unsigned int n=0; n<word.size(); ++n)
       if (guesses[i]==word[n]) result[n] = word[n];
   return result;
 }
