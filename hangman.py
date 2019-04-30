@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # -*-coding:utf-8-*-
+
 """
+// Copyright (c) 2019, Oliver Merkel.
+// Please see the AUTHORS file for details.
+// All rights reserved.
+//
+// Use of this code is governed by a
+// MIT license that can be found in the LICENSE file.
+
 >>> Game().loop(word="banana", guesses="abn")
 banana
 You won!
@@ -23,6 +31,23 @@ class Game:
     """
     print("Guess my secret word with a maximum of " + str(self.maxFalseAttempts) + " false attempts.")
     return self
+
+  def playAgain(self, isYes = False, isNo = False):
+    """
+    >>> Game().playAgain(isYes = True)
+    True
+    >>> Game().playAgain(isNo = True)
+    False
+    """
+    yes = [ 'y', 'yes', 'sure' ]
+    no = [ 'n', 'no', 'nope' ]
+    while not isYes and not isNo:
+      answer = str(input('Play again? ')).lower()
+      isYes = answer in yes
+      isNo = answer in no
+      if not isYes and not isNo:
+        print('Sorry? Please answer with yes or no...')
+    return isYes;
 
   def getWord(self, verbose=False, fileName="dict_en.txt"):
     """
@@ -110,4 +135,9 @@ class Game:
 
 if __name__ == "__main__":
   g = Game()
-  g.welcome().loop(word=g.getWord())
+  g.welcome()
+  keepPlaying = True
+  while keepPlaying:
+    g.loop(word=g.getWord())
+    keepPlaying = g.playAgain()
+  print('Bye.')
