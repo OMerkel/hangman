@@ -9,6 +9,11 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:math';
 
+void welcome(maxFalseAttempts) {
+  print('Guess my secret word with a maximum ' +
+    'of ${maxFalseAttempts} false attempts.');
+}
+
 bool playAgain() {
   var yes = [ 'y', 'yes', 'sure' ];
   var no = [ 'n', 'no', 'nope' ];
@@ -57,56 +62,55 @@ bool isalpha(c) {
   return 'abcdefghijklmnopqrstuvwxyz'.contains(c.toLowerCase());
 }
 
-void main() {
+void loop( {endOfGame:false, falseAttempts:0, word:'hangman', guesses:''} ) {
   var maxFalseAttempts = 5;
-  var keepPlaying = true;
-  while (keepPlaying) {
-    var falseAttempts = 0;
-    var endOfGame = false;
-    var word = getWord();
-    var guesses = '';
-    print('Guess my secret word with a maximum ' +
-      'of ${maxFalseAttempts} false attempts.');
-    while (!endOfGame) {
-      var test = getResult(word, guesses);
-      print(test['result']);
-      if (test['incorrect'] == 0) {
-        endOfGame = true;
-        print('You won!');
+  welcome(maxFalseAttempts);
+  while (!endOfGame) {
+    var test = getResult(word, guesses);
+    print(test['result']);
+    if (test['incorrect'] == 0) {
+      endOfGame = true;
+      print('You won!');
+    }
+    else {
+      print('Guess a character: ');
+      var guess = stdin.readLineSync().toLowerCase();
+      if (guess.length != 1) {
+        print('Type a single character only! Try again...');
+        continue;
       }
-      else{
-        print('Guess a character: ');
-        var guess = stdin.readLineSync().toLowerCase();
-        if (guess.length != 1) {
-          print('Type a single character only! Try again...');
-          continue;
+      if (!isalpha(guess)) {
+        print('Type a alphabetic character! Try again...');
+        continue;
+      }
+      if (guesses.contains(guess)) {
+        print('You already guessed this character! Try again...');
+        continue;
+      }
+      guesses += guess;
+      if (!word.contains(guess)) {
+        falseAttempts++;
+        print('Wrong.');
+        if (falseAttempts == 1) {
+          print('You have one false attempt.');
         }
-        if (!isalpha(guess)) {
-          print('Type a alphabetic character! Try again...');
-          continue;
+        else {
+          print('You have ${falseAttempts} false attempts.');
         }
-        if (guesses.contains(guess)) {
-          print('You already guessed this character! Try again...');
-          continue;
-        }
-        guesses += guess;
-        if (!word.contains(guess)) {
-          falseAttempts++;
-          print('Wrong.');
-          if (falseAttempts == 1) {
-            print('You have one false attempt.');
-          }
-          else {
-            print('You have ${falseAttempts} false attempts.');
-          }
-          if (falseAttempts > maxFalseAttempts) {
-            endOfGame = true;
-            print('You lost!');
-            print('The secret word has been ' + word.toUpperCase());
-          }
+        if (falseAttempts > maxFalseAttempts) {
+          endOfGame = true;
+          print('You lost!');
+          print('The secret word has been ' + word.toUpperCase());
         }
       }
     }
+  }
+}
+
+void main() {
+  var keepPlaying = true;
+  while (keepPlaying) {
+    loop(word: getWord());
     keepPlaying = playAgain();
   }
   print('Bye.');
