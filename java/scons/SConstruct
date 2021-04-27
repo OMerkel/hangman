@@ -1,0 +1,2 @@
+Jar(target = 'hangman.jar',
+  source = ['hangman\Hangman.java', 'Manifest.txt'])

@@ -1,0 +1,1 @@
+perl -I . hangman.pl 
