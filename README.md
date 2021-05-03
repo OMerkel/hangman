@@ -5,6 +5,7 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [C# / ECMA-334]( https://www.ecma-international.org/publications-and-standards/standards/ecma-334/ )
 * [Dart]( https://dart.dev/ )
 * [Delphi / Object Pascal]( https://freepascal.org/ )
+* [Go]( https://golang.org/ )
 * [Groovy]( https://groovy-lang.org/ )
 * [Java]( https://openjdk.java.net/ )
     * [Maven]( https://maven.apache.org/ )
@@ -17,3 +18,4 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [Perl]( https://www.perl.org/ )
 * [Python]( https://www.python.org/ )
 * [Ruby]( https://www.ruby-lang.org/ )
+* [Visual Basic]( https://docs.microsoft.com/en-us/dotnet/visual-basic/ )
