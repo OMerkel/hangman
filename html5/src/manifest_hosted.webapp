@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "name": "Hangman",
+  "description": "Hangman game",
+  "launch_path": "/hangman/html5/src/index.html",
+  "icons": {
+    "16": "/hangman/html5/src/img/icons/hangman16.png",
+    "32": "/hangman/html5/src/img/icons/hangman32.png",
+    "48": "/hangman/html5/src/img/icons/hangman48.png",
+    "60": "/hangman/html5/src/img/icons/hangman60.png",
+    "64": "/hangman/html5/src/img/icons/hangman64.png",
+    "90": "/hangman/html5/src/img/icons/hangman90.png",
+    "120": "/hangman/html5/src/img/icons/hangman120.png",
+    "128": "/hangman/html5/src/img/icons/hangman128.png",
+    "256": "/hangman/html5/src/img/icons/hangman256.png"
+  },
+  "developer": {
+    "name": "Oliver Merkel",
+    "url": "https://github.com/OMerkel/hangman"
+  },
+  "installs_allowed_from": ["*"]
+}
