@@ -680,7 +680,7 @@ Hmi.prototype.handler = function ( ev ) {
       guess = this.keyboard[i].text.attr('text');
       if (!this.guesses.includes(guess)) {
         this.guesses += guess;
-        if (!this.word.includes(guess)) {
+        if (!this.word.toLowerCase().includes(guess)) {
           this.falseAttempts++;
           this.keyboard[i].back.attr({ 'fill': 'red' });
         }

@@ -96,7 +96,7 @@ Hangman.prototype.loop = function() {
       }
       else {
         guesses += guess;
-        if (!word.includes(guess)) {
+        if (!word.toLowerCase().includes(guess)) {
           falseAttempts++;
           console.log('Wrong.');
           if (falseAttempts == 1) {
