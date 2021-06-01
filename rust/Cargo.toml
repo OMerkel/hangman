@@ -1,0 +1,8 @@
+[package]
+name = "hangman"
+version = "1.0.0"
+authors = ["Oliver Merkel"]
+edition = "2018"
+
+[dependencies]
+rand = "0.8.3"
