@@ -8,6 +8,8 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [Fortran]( https://gcc.gnu.org/fortran/ )
 * [Go]( https://golang.org/ )
 * [Groovy]( https://groovy-lang.org/ )
+* [Haskell]( https://www.haskell.org/ )
+    * [Cabal]( https://www.haskell.org/cabal/ )
 * [Java]( https://openjdk.java.net/ )
     * [Maven]( https://maven.apache.org/ )
     * [Gradle]( https://gradle.org/ )
