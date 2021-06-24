@@ -25,4 +25,5 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [Ruby]( https://www.ruby-lang.org/ )
 * [Rust]( https://www.rust-lang.org/ )
     * [Cargo]( https://doc.rust-lang.org/stable/cargo/ )
+* [Scheme / R<sup>6</sup>RS]( http://community.schemewiki.org/?RnRS )
 * [Visual Basic]( https://docs.microsoft.com/en-us/dotnet/visual-basic/ )
