@@ -91,6 +91,6 @@
   (while keep-playing
     (game-loop)
     (setq keep-playing (play-again)))
-  (princ "Bye."))
+  (princ "Bye.\n"))
 
 (menu-loop)
