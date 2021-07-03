@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/env -S perl -I .
 =begin comment
 
   Copyright (c) 2021, Oliver Merkel.
