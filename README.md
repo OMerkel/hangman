@@ -3,6 +3,7 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [C++]( https://isocpp.org/ )
     * [CMake]( https://cmake.org/ ), [GNU Make]( https://www.gnu.org/software/make/ )
 * [C# / ECMA-334]( https://www.ecma-international.org/publications-and-standards/standards/ecma-334/ )
+* [D]( https://dlang.org/ )
 * [Dart]( https://dart.dev/ )
 * [Delphi / Object Pascal]( https://freepascal.org/ )
 * [Fortran]( https://gcc.gnu.org/fortran/ )
