@@ -6,6 +6,7 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [D]( https://dlang.org/ )
 * [Dart]( https://dart.dev/ )
 * [Delphi / Object Pascal]( https://freepascal.org/ )
+* [F#]( http://fsharp.org/ )
 * [Fortran]( https://gcc.gnu.org/fortran/ )
 * [Go]( https://golang.org/ )
 * [Groovy]( https://groovy-lang.org/ )
