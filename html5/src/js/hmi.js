@@ -567,7 +567,7 @@ Hmi.prototype.handler = function ( ev ) {
 };
 
 Hmi.prototype.resize = function () {
-  var offsetHeight = 132,
+  var offsetHeight = 146,
     offsetWidth = 48,
     availableWidth = window.innerWidth - offsetWidth,
     availableHeight = window.innerHeight - offsetHeight;
