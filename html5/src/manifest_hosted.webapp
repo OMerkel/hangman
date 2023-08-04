@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "name": "Hangman",
   "description": "Hangman game",
   "launch_path": "/hangman/html5/src/index.html",
