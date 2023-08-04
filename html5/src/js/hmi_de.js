@@ -25,8 +25,7 @@ function Hmi() {
   this.word = 'shortsightedness';
   this.guesses = '';  
   this.panel = { x: 320, y: 460 };
-  this.paper = Raphael( 'board', this.panel.x, this.panel.y);
-  this.paper.setViewBox(0, 0, this.panel.x, this.panel.y, false );
+  this.paper = Snap('#board').attr({viewBox: '0 0 ' + this.panel.x + ' ' + this.panel.y });
   this.resize();
   this.paper.rect( 0, 0, this.panel.x, this.panel.y ).attr({
     stroke: '#444', 'stroke-width': 0.2, 'stroke-linecap': 'round',
@@ -38,10 +37,10 @@ function Hmi() {
         .attr({ 'fill': 'none', stroke: 'green', 'stroke-width': 20 }),
     ], [
       this.paper.path( 'M50,80l0,220l50,0l-50,-50' )
-        .attr({ 'fill': 'none', 'stroke-width': 10 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 10 }),
     ], [
       this.paper.path( 'M110,80l-60,60l0,-60l120,0' )
-        .attr({ 'fill': 'none', 'stroke-width': 8 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 8 }),
     ], [
       this.paper.path( 'M170,80l0,60m-3,-3l6,0m-6,-3l6,0m-6,-3l6,0' )
         .attr({ 'fill': 'none', stroke: 'maroon', 'stroke-width': 3, 'stroke-linecap': 'round' }),
@@ -49,31 +48,31 @@ function Hmi() {
         .attr({ 'fill': 'none', stroke: 'maroon', 'stroke-width': 2 }),
     ], [
       this.paper.circle( 170, 140, 20 )
-        .attr({ 'fill': 'orange', 'stroke-width': 4 }),
+        .attr({ 'fill': 'orange', stroke: 'black', 'stroke-width': 4 }),
       /* eyes */
       this.paper.circle( 163, 135, 2 )
-        .attr({ 'fill': 'black', 'stroke-width': 4 }),
+        .attr({ 'fill': 'black', stroke: 'black', 'stroke-width': 4 }),
       this.paper.circle( 177, 135, 2 )
-        .attr({ 'fill': 'black', 'stroke-width': 4 }),
+        .attr({ 'fill': 'black', stroke: 'black', 'stroke-width': 4 }),
       /* mouth */
       this.paper.circle( 170, 148, 4 )
-        .attr({ 'fill': 'none', 'stroke-width': 2 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 2 }),
     ], [
       this.paper.path( 'M140,150l30,10l0,32l-30,30l-10,-10' )
-        .attr({ 'fill': 'none', 'stroke-width': 4 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 4 }),
     ], [
       this.paper.path( 'M200,150l-30,10l0,32l30,30l10,-10' )
-        .attr({ 'fill': 'none', 'stroke-width': 4 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 4 }),
       this.paper.circle( 170, 140, 20 )
-        .attr({ 'fill': 'lightgreen', 'stroke-width': 4 }),
+        .attr({ 'fill': 'lightgreen', stroke: 'black', 'stroke-width': 4 }),
       /* eyes */
       this.paper.path( 'M158,130l10,10m0,-10l-10,10' )
-        .attr({ 'fill': 'none', 'stroke-width': 3 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
       this.paper.path( 'M172,130l10,10m0,-10l-10,10' )
-        .attr({ 'fill': 'none', 'stroke-width': 3 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
       /* mouth */
       this.paper.path( 'M159,150l25,-6' )
-        .attr({ 'fill': 'none', 'stroke-width': 3 }),
+        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
     ]
   ];
   this.keyboard = [];
@@ -83,8 +82,12 @@ function Hmi() {
       this.keyboard[this.keyboard.length] = {
         back: this.paper.circle( 15+16*r+32*i, keyboardPosY+r*30, 14 )
           .attr({ 'fill': 'lightblue', stroke: 'white', 'stroke-width': 3 }),
-        text: this.paper.text(15+16*r+32*i, keyboardPosY+r*30,
-          KEYS[r][i]).attr({ 'font-size': 20}),
+        text: this.paper.text( 15+16*r+32*i, 5+keyboardPosY+r*30,
+          KEYS[r][i]).attr({
+            'font-size': 18,
+            'text-anchor': 'middle',
+            'alignment-baseline': 'middle'
+          }),
         button: this.paper.circle( 15+16*r+32*i, keyboardPosY+r*30, 14 )
           .attr({ 'fill': 'white', stroke: 'black',
             'stroke-width': 1 , 'fill-opacity': 0.01 }),
@@ -93,7 +96,12 @@ function Hmi() {
     }
   }
   this.result = this.paper.text(160, 40,
-    '_ho_t_i_ht_dn___').attr({ 'font-size': 30, 'letter-spacing': 3 })
+    '_ho_t_i_ht_dn___').attr({
+      'font-size': 30,
+      'text-anchor': 'middle',
+      'alignment-baseline': 'middle',
+      'letter-spacing': '3px'
+    })
 };
 
 Hmi.prototype.getWord = function() {
@@ -676,7 +684,7 @@ Hmi.prototype.getResult = function() {
 Hmi.prototype.handler = function ( ev ) {
   var guess = null;
   for(var i=0; i<this.keyboard.length && guess==null; ++i) {
-    if (this.keyboard[i].button.id == ev.currentTarget.raphaelid) {
+    if (this.keyboard[i].button.id == ev.currentTarget.snap) {
       guess = this.keyboard[i].text.attr('text');
       if (!this.guesses.includes(guess)) {
         this.guesses += guess;
@@ -694,35 +702,20 @@ Hmi.prototype.handler = function ( ev ) {
 };
 
 Hmi.prototype.resize = function () {
-  var offsetHeight = 64,
-    availableWidth = window.innerWidth - 64,
+  var offsetHeight = 132,
+    offsetWidth = 48,
+    availableWidth = window.innerWidth - offsetWidth,
     availableHeight = window.innerHeight - offsetHeight;
   this.size = availableWidth/availableHeight < this.panel.x/this.panel.y ?
     { x: availableWidth, y: availableWidth * this.panel.y/this.panel.x } :
     { x: availableHeight * this.panel.x/this.panel.y, y: availableHeight } ;
-  this.paper.setSize( this.size.x, this.size.y );
-  this.paper.setViewBox( 0, 0, this.panel.x, this.panel.y, false );
+  $('#board').attr({ width: ''+this.size.x, height: ''+this.size.y });
   var boardMarginTop = (availableHeight - this.size.y) / 2;
   $('#board').css({ 'margin-top': boardMarginTop + 'px' });
   $('#selectmenu').css({ 'margin-top': boardMarginTop + 'px' });
   $('#game-page').css({
     'background-size': 'auto ' + (this.size.x * 9 / 6) + 'px',
   });
-  var size = (this.size.x + this.size.y) / 2 / 9;
-  var minSize = 60;
-  var iconSize = size < minSize ? minSize : size;
-  var maxSize = 120;
-  iconSize = maxSize < iconSize ? maxSize : iconSize;
-  $('#customMenu').css({
-    'width': iconSize+'px', 'height': iconSize+'px',
-    'background-size': iconSize+'px ' + iconSize+'px',
-  });
-  var backAttributes = {
-    'width': iconSize+'px', 'height': iconSize+'px',
-    'background-size': iconSize+'px ' + iconSize+'px',
-  };
-  $('#customBackRules').css(backAttributes);
-  $('#customBackAbout').css(backAttributes);
 };
 
 Hmi.prototype.initGame = function () {
@@ -733,7 +726,6 @@ Hmi.prototype.initGame = function () {
   this.guesses = '';
   this.word = this.getWord();
   this.update();
-  $('#left-panel').panel('close');
 };
 
 Hmi.prototype.init = function () {
@@ -743,7 +735,7 @@ Hmi.prototype.init = function () {
   $window.resize( this.resize.bind( this ) );
   $window.resize();
   this.update();
-  $('#restart').on( 'click', this.initGame.bind(this) );
+  $('#new').on( 'click', this.initGame.bind(this) );
 };
 
 Hmi.prototype.update = function() {
