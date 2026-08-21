@@ -12,100 +12,15 @@
  *
  * @section DESCRIPTION
  *
- * @brief Class Hmi.
- *
- * Class representing the view or Hmi of Hangman.
- * Hangman is a vocabulary / word game.
- *
+ * English locale bootstrap for the Hangman game (vanilla Javascript,
+ * no jQuery / jQuery UI / Snap.svg).
  */
+
+import { Hmi, initAccordion, initTabs } from './hangman-core.js';
 
 const KEYS = [ 'qwertyuiop', 'asdfghjkl', 'zxcvbnm' ];
 
-function Hmi() {
-  this.word = 'shortsightedness';
-  this.guesses = '';  
-  this.panel = { x: 320, y: 460 };
-  this.paper = Snap('#board').attr({viewBox: '0 0 ' + this.panel.x + ' ' + this.panel.y });
-  this.resize();
-  this.paper.rect( 0, 0, this.panel.x, this.panel.y ).attr({
-    stroke: '#444', 'stroke-width': 0.2, 'stroke-linecap': 'round',
-    fill: 'darkslategrey'
-  });
-  this.gallows = [
-    [
-      this.paper.path( 'M20,300l250,0' )
-        .attr({ 'fill': 'none', stroke: 'green', 'stroke-width': 20 }),
-    ], [
-      this.paper.path( 'M50,80l0,220l50,0l-50,-50' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 10 }),
-    ], [
-      this.paper.path( 'M110,80l-60,60l0,-60l120,0' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 8 }),
-    ], [
-      this.paper.path( 'M170,80l0,60m-3,-3l6,0m-6,-3l6,0m-6,-3l6,0' )
-        .attr({ 'fill': 'none', stroke: 'maroon', 'stroke-width': 3, 'stroke-linecap': 'round' }),
-      this.paper.circle( 170, 150, 10 ).transform('s0.75,1')
-        .attr({ 'fill': 'none', stroke: 'maroon', 'stroke-width': 2 }),
-    ], [
-      this.paper.circle( 170, 140, 20 )
-        .attr({ 'fill': 'orange', stroke: 'black', 'stroke-width': 4 }),
-      /* eyes */
-      this.paper.circle( 163, 135, 2 )
-        .attr({ 'fill': 'black', stroke: 'black', 'stroke-width': 4 }),
-      this.paper.circle( 177, 135, 2 )
-        .attr({ 'fill': 'black', stroke: 'black', 'stroke-width': 4 }),
-      /* mouth */
-      this.paper.circle( 170, 148, 4 )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 2 }),
-    ], [
-      this.paper.path( 'M140,150l30,10l0,32l-30,30l-10,-10' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 4 }),
-    ], [
-      this.paper.path( 'M200,150l-30,10l0,32l30,30l10,-10' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 4 }),
-      this.paper.circle( 170, 140, 20 )
-        .attr({ 'fill': 'lightgreen', stroke: 'black', 'stroke-width': 4 }),
-      /* eyes */
-      this.paper.path( 'M158,130l10,10m0,-10l-10,10' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
-      this.paper.path( 'M172,130l10,10m0,-10l-10,10' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
-      /* mouth */
-      this.paper.path( 'M159,150l25,-6' )
-        .attr({ 'fill': 'none', stroke: 'black', 'stroke-width': 3 }),
-    ]
-  ];
-  this.keyboard = [];
-  var keyboardPosY = 350;
-  for(var r=0; r<KEYS.length; ++r) {
-    for(var i=0; i<KEYS[r].length; ++i) {
-      this.keyboard[this.keyboard.length] = {
-        back: this.paper.circle( 15+16*r+32*i, keyboardPosY+r*30, 14 )
-          .attr({ 'fill': 'lightblue', stroke: 'white', 'stroke-width': 3 }),
-        text: this.paper.text( 15+16*r+32*i, 5+keyboardPosY+r*30,
-          KEYS[r][i]).attr({
-            'font-size': 18,
-            'text-anchor': 'middle',
-            'alignment-baseline': 'middle'
-          }),
-        button: this.paper.circle( 15+16*r+32*i, keyboardPosY+r*30, 14 )
-          .attr({ 'fill': 'white', stroke: 'black',
-            'stroke-width': 1 , 'fill-opacity': 0.01 }),
-      }
-      this.keyboard[this.keyboard.length-1].button.click( this.handler.bind(this) );
-    }
-  }
-  this.result = this.paper.text(160, 40,
-    '_ho_t_i_ht_dn___').attr({
-      'font-size': 30,
-      'text-anchor': 'middle',
-      'alignment-baseline': 'middle',
-      'letter-spacing': '3px'
-    })
-};
-
-Hmi.prototype.getWord = function() {
-var a = [
+const WORDS = [
   "account",
   "action",
   "addition",
@@ -524,99 +439,15 @@ var a = [
   "yellow",
   "yesterday",
   "zigzag",
-  "zombie"
+  "zombie",
 ];
 
-  return a[ Math.floor( Math.random() * a.length )];
-};
+const formatHeader = (falseAttempts) => `Hangman - incorrect guesses: ${falseAttempts}`;
 
-Hmi.prototype.getResult = function() {
-  var result = '';
-  var incorrect = 0;
-  for (var i=0; i<this.word.length; ++i) {
-    var char=this.word[i];
-    if (this.guesses.includes(char.toLowerCase())) {
-      result += char;
-    }
-    else {
-      result += '_';
-      incorrect++;
-    }
-  }
-  return { 'result': result, 'incorrect': incorrect };
-};
+document.addEventListener('DOMContentLoaded', () => {
+  initTabs(document.getElementById('tabs'));
+  initAccordion(document.getElementById('accordion'));
 
-Hmi.prototype.handler = function ( ev ) {
-  var guess = null;
-  for(var i=0; i<this.keyboard.length && guess==null; ++i) {
-    if (this.keyboard[i].button.id == ev.currentTarget.snap) {
-      guess = this.keyboard[i].text.attr('text');
-      if (!this.guesses.includes(guess)) {
-        this.guesses += guess;
-        if (!this.word.toLowerCase().includes(guess)) {
-          this.falseAttempts++;
-          this.keyboard[i].back.attr({ 'fill': 'red' });
-        }
-        else {
-          this.keyboard[i].back.attr({ 'fill': 'lightgreen' });
-        }
-        this.update();
-      }
-    }
-  }
-};
-
-Hmi.prototype.resize = function () {
-  var offsetHeight = 146,
-    offsetWidth = 48,
-    availableWidth = window.innerWidth - offsetWidth,
-    availableHeight = window.innerHeight - offsetHeight;
-  this.size = availableWidth/availableHeight < this.panel.x/this.panel.y ?
-    { x: availableWidth, y: availableWidth * this.panel.y/this.panel.x } :
-    { x: availableHeight * this.panel.x/this.panel.y, y: availableHeight } ;
-  $('#board').attr({ width: ''+this.size.x, height: ''+this.size.y });
-  var boardMarginTop = (availableHeight - this.size.y) / 2;
-  $('#board').css({ 'margin-top': boardMarginTop + 'px' });
-  $('#selectmenu').css({ 'margin-top': boardMarginTop + 'px' });
-  $('#game-page').css({
-    'background-size': 'auto ' + (this.size.x * 9 / 6) + 'px',
-  });
-};
-
-Hmi.prototype.initGame = function () {
-  this.falseAttempts = 0;
-  for(var i=0; i<this.keyboard.length; ++i) {
-    this.keyboard[i].back.attr({ 'fill': 'lightblue' });
-  }
-  this.guesses = '';
-  this.word = this.getWord();
-  this.update();
-};
-
-Hmi.prototype.init = function () {
-  this.initGame();
-  var $window = $(window);
-  window.addEventListener("orientationchange", this.resize.bind( this ));
-  $window.resize( this.resize.bind( this ) );
-  $window.resize();
-  this.update();
-  $('#new').on( 'click', this.initGame.bind(this) );
-};
-
-Hmi.prototype.update = function() {
-  var result = this.getResult();
-  this.result.attr({ text: result['result'] });
-  $('#myheader').html( "Hangman - incorrect guesses: " + this.falseAttempts );
-  for(var i=0; i<this.gallows.length; ++i) {
-    for(var j=0; j<this.gallows[i].length; ++j) {
-      var op = i<this.falseAttempts+1 ? 1 : 0;
-      this.gallows[i][j].attr({ opacity: op });
-    }
-  }
-};
-
-var g_Hmi;
-$(document).ready( function () {
-  g_Hmi = new Hmi();
-  g_Hmi.init();
+  const hmi = new Hmi({ words: WORDS, keysLayout: KEYS, formatHeader });
+  hmi.init();
 });

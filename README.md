@@ -1,7 +1,11 @@
 # Hangman
+
+Play the HTML5/Javascript/CSS version now in [English]( https://omerkel.github.io/hangman/html5/src/ ) or [German]( https://omerkel.github.io/hangman/html5/src/index_de.html ).
+
 Vocabulary and word game Hangman / Galgenmännchen ported onto various programming languages and build systems:
+
 * [C++]( https://isocpp.org/ )
-    * [CMake]( https://cmake.org/ ), [GNU Make]( https://www.gnu.org/software/make/ )
+  * [CMake]( https://cmake.org/ ), [GNU Make]( https://www.gnu.org/software/make/ )
 * [C# / ECMA-334]( https://www.ecma-international.org/publications-and-standards/standards/ecma-334/ )
 * [D]( https://dlang.org/ )
 * [Dart]( https://dart.dev/ )
@@ -11,14 +15,15 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [Go]( https://golang.org/ )
 * [Groovy]( https://groovy-lang.org/ )
 * [Haskell]( https://www.haskell.org/ )
-    * [Cabal]( https://www.haskell.org/cabal/ )
+  * [Cabal]( https://www.haskell.org/cabal/ )
+* [HTML5/Javascript/CSS]( https://www.ecma-international.org/publications-and-standards/standards/ecma-262/ )
 * [Java]( https://openjdk.java.net/ )
-    * [Maven]( https://maven.apache.org/ )
-    * [Gradle]( https://gradle.org/ )
-    * [SCons]( https://scons.org/ )
+  * [Maven]( https://maven.apache.org/ )
+  * [Gradle]( https://gradle.org/ )
+  * [SCons]( https://scons.org/ )
 * [Javascript / ECMA-262]( https://www.ecma-international.org/publications-and-standards/standards/ecma-262/ )
-    * [Node.js]( https://nodejs.org/ )
-    * [NPM]( https://www.npmjs.com/ )
+  * [Node.js]( https://nodejs.org/ )
+  * [NPM]( https://www.npmjs.com/ )
 * [Julia]( https://julialang.org/ )
 * [Lisp]( https://common-lisp.net/ )
 * [Lua]( http://www.lua.org/ )
@@ -26,7 +31,7 @@ Vocabulary and word game Hangman / Galgenmännchen ported onto various programmi
 * [Python]( https://www.python.org/ )
 * [Ruby]( https://www.ruby-lang.org/ )
 * [Rust]( https://www.rust-lang.org/ )
-    * [Cargo]( https://doc.rust-lang.org/stable/cargo/ )
+  * [Cargo]( https://doc.rust-lang.org/stable/cargo/ )
 * [Scala]( https://www.scala-lang.org/ )
-* [Scheme / R<sup>6</sup>RS]( http://community.schemewiki.org/?RnRS )
+* [Scheme / R⁶RS]( http://community.schemewiki.org/?RnRS )
 * [Visual Basic]( https://docs.microsoft.com/en-us/dotnet/visual-basic/ )
